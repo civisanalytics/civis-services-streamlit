@@ -9,7 +9,7 @@ on Civis Platform.
    The Civis Platform user account that's going to deploy this Streamlit app must have
    access to this GitHub repo
    (either because this GitHub repo is public, or because the Civis Platform user account
-   is associated with a GitHub credential that can access this GitHub repo).
+   is associated with a GitHub credential that can access this private GitHub repo).
    For a test app, you may [fork this GitHub repository](https://github.com/civisanalytics/civis-services-streamlit/fork)
    where the app's source code is provided at [`test_app/`](test_app).
 2. The following explains the expected files for your app:
