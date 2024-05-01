@@ -1,17 +1,41 @@
 # civis-services-streamlit
 
-This repository provides a Docker image for deploying a Streamlit application
-on Civis Platform.
+This repository provides the following components:
+
+* A Docker image to support Streamlit applications on Civis Platform
+* A demo Streamlit app that's readily deployable on Civis Platform
+
+## Quickstart Using the Demo Application
+
+To get a sense of what a Streamlit app looks like on Civis Platform:
+
+* Log on to Civis Platform.
+* From the top navigation bar, click "Publish".
+* Under "Services", clck "Streamlit Demo".
+
+These steps create a new Civis Platform service configured for a Streamlit demo app
+pointing to this GitHub repository.
+The app is now ready to be deployed.
+Please follow [these instructions](https://support.civisanalytics.com/hc/en-us/articles/360001335031-Civis-Service-Deployment#StartaService/PreviewaDeployment)
+for service deployment.
+
+If you would like to start making the demo app your own
+by making code changes,
+you may [fork this GitHub repository](https://github.com/civisanalytics/civis-services-streamlit/fork)
+where the demo app's source code is in the directory [`demo_app/`](demo_app).
+If you'd like to host and use your own Docker image,
+[`Dockerfile`](Dockerfile) and [`entrypoint.sh`](entrypoint.sh) from this GitHub repository
+defines the `civisanalytics/civis-services-streamlit` image that you may like to modify upon.
 
 ## Building and Deploying Your Streamlit Application
 
+If you would like to build your own Streamlit application from scratch
+and deploy it on Civis Platform,
+here are the requirements.
+
 1. Your Streamlit application must have its source code hosted on a GitHub repository.
    The Civis Platform user account that's going to deploy this Streamlit app must have
-   access to this GitHub repo
-   (either because this GitHub repo is public, or because the Civis Platform user account
-   is associated with a GitHub credential that can access this private GitHub repo).
-   For a test app, you may [fork this GitHub repository](https://github.com/civisanalytics/civis-services-streamlit/fork)
-   where the app's source code is provided at [`test_app/`](test_app).
+   access to this GitHub repo.
 2. The following explains the expected files for your app:
 
    ```shell
@@ -25,12 +49,15 @@ on Civis Platform.
    # of this GitHub repo.
 
    requirements.txt
-   # A strongly recommended, though not required, file.
+   # A strongly recommended file, though not strictly required.
    # requirements.txt specifies the Python dependencies to be installed for your Streamlit app to work.
    # Note that "streamlit" itself should be one of the packages specified
    # (so that you can pin the specific Streamlit version for your use case).
    # If requirements.txt is presented,
    # the command `pip install -r requirements.txt` will be run to install these dependencies.
+   # If requirements.txt isn't provided, Streamlit will be installed
+   # with `pip install streamlit` pulling in whatever Streamlit version is available
+   # for the given Python version.
 
    pyproject.toml
    # An optional file.
@@ -49,9 +76,9 @@ on Civis Platform.
 3. Once your app code is on a GitHub repo, create a new service on Civis Platform
    by following [this page](https://support.civisanalytics.com/hc/en-us/articles/360001335031-Civis-Service-Deployment).
    Most importantly, specify the GitHub repo URL as well as the Git tag (or branch, or Git commit hash).
-4. If your code comes from the test app in this GitHub repository,
-   specify the path `test_app` that points to where the app code is located.
-   If this path is unspecified, the app code must be at the root level of your GitHub repository.
+4. If your code is at a directory in your repo (rather than directly at the root level of your repo),
+   specify the directory path that points to where the app code is located.
+   (For the demo app in the previous section above, the directory path would be `demo_app` from this current repo.)
 5. For the Docker image, the name is `civisanalytics/civis-services-streamlit`,
    and the tag is one of those [listed on DockerHub](https://hub.docker.com/repository/docker/civisanalytics/civis-services-streamlit/tags).
    Note that the specific Docker image name and tag you've chosen determines which Python version

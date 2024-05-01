@@ -23,7 +23,7 @@ COPY ./entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 
 FROM base AS test
-COPY ./test_app/ /app/test_app/
+COPY ./demo_app/ /app/demo_app/
 
 # Defaults to production as the final stage
 FROM production

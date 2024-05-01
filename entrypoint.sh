@@ -2,6 +2,8 @@
 
 set -e
 
+python --version
+
 cd "$APP_DIR/$REPO_PATH_DIR"
 
 if [ ! -f app.py ]; then

@@ -1,7 +1,4 @@
-"""Test app for checking that the built Docker image works.
-
-This test app is not meant to test or show any Civis API or other Streamlit features.
-"""
+"""Demo app for civis-services-streamlit."""
 
 import streamlit as st
 import pandas as pd
