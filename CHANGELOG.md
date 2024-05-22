@@ -14,6 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [1.0.0] - 2024-05-29
+## [1.0.0] - 2024-05-23
 
 First release!
