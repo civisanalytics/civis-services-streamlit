@@ -39,41 +39,46 @@ here are the requirements.
    access to this GitHub repo.
 2. The following explains the expected files for your app:
 
-   ```shell
-   app.py
-   # A required file.
-   # app.py is your Streamlit app's entry point.
-   # For which Python version you should use (e.g., Python 3.12),
-   # it is determined by which Docker image name and tag you're going to use
-   # to deploy your app on Civis Platform.
-   # The Python version is specified by the base image in the file `Dockerfile`
-   # of this GitHub repo.
+   * `app.py`
 
-   requirements.txt
-   # A strongly recommended file, though not strictly required.
-   # requirements.txt specifies the Python dependencies to be installed for your Streamlit app to work.
-   # Note that "streamlit" itself should be one of the packages specified
-   # (so that you can pin the specific Streamlit version for your use case).
-   # If requirements.txt is present,
-   # the command `pip install -r requirements.txt` will be run to install these dependencies.
+     A required file.
+     `app.py` is your Streamlit app's entry point.
+     For which Python version you should use (e.g., Python 3.12),
+     it is determined by which Docker image name and tag you're going to use
+     to deploy your app on Civis Platform.
+     The Python version is specified by the base image in the file `Dockerfile`
+     of this GitHub repo.
 
-   pyproject.toml
-   # An optional file.
-   # If a Python package needs to be installed in order for your Streamlit app
-   # to work, pyproject.toml plus the associated package code must be present.
-   # If pyproject.toml is detected, `pip install --no-deps -e .` will be run to install
-   # your Python package (`--no-deps` for not installing dependencies defined
-   # in pyproject.toml, because they should already be specified in requirements.txt above).
+   * `requirements.txt`
 
-   .streamlit/config.toml
-   # An optional file.
-   # These are Streamlit options, if you need to configure them. Reference:
-   # https://docs.streamlit.io/develop/api-reference/configuration/config.toml
-   ```
+     A strongly recommended file, though not strictly required.
+     `requirements.txt` specifies the Python dependencies to be installed for your Streamlit app to work.
+     Note that `streamlit` itself should be one of the packages specified
+     (so that you can pin the specific Streamlit version for your use case).
+     If `requirements.txt` is present,
+     the command `pip install -r requirements.txt` will be run to install these dependencies.
 
-3. Once your app code is on a GitHub repo, create a new service on Civis Platform
-   by following [this page](https://support.civisanalytics.com/hc/en-us/articles/360001335031-Civis-Service-Deployment).
-   Most importantly, specify the GitHub repo URL as well as the Git tag (or branch, or Git commit hash).
+   * `pyproject.toml`
+
+     An optional file.
+     If a Python package needs to be installed in order for your Streamlit app to work,
+     `pyproject.toml` plus the associated package code must be present.
+     If `pyproject.toml` is detected,
+     `pip install --no-deps -e .` will be run to install your Python package
+     (`--no-deps` for not installing dependencies defined in `pyproject.toml`,
+     because they should already be specified in `requirements.txt` above).
+
+   * `.streamlit/config.toml`
+
+     An optional file.
+     These are Streamlit options, if you need to configure them. Reference:
+     https://docs.streamlit.io/develop/api-reference/configuration/config.toml
+
+3. Once your app code is on a GitHub repo, either create a new service on Civis Platform
+   by following [this page](https://support.civisanalytics.com/hc/en-us/articles/360001335031-Civis-Service-Deployment),
+   or launch a Streamlit template service from Civis Platform's top navigation bar -> Publish
+   -> Services -> Streamlit Demo.
+   Specify or adjust the GitHub repo URL as well as the Git tag (or branch, or Git commit hash).
 4. If your code is at a directory in your repo (rather than directly at the root level of your repo),
    specify the directory path that points to where the app code is located.
    (For the demo app in the previous section above, the directory path would be `demo_app` from this current repo.)
@@ -85,8 +90,7 @@ here are the requirements.
 ## Support
 
 For feature inquiries, bug reports, and other questions,
-Civis client users should reach out to their Civis point-of-contact person,
-whereas Civis employees should file an internal ticket.
+Civis client users should reach out to support@civisanalytics.com.
 
 ## Changelog
 

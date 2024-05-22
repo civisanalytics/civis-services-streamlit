@@ -15,7 +15,7 @@ jobs:
           command: docker build --target test -t testimage .
       - run:
           name: Check that the demo app can run inside the image
-          command: docker run testimage /app/demo_app/run_demo_app.sh
+          command: docker run testimage /app/demo_app/test_demo_app_on_ci.sh
 
 workflows:
   build-and-test:
