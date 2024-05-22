@@ -1,5 +1,7 @@
 """Demo app for civis-services-streamlit."""
 
+import os
+
 import civis
 import streamlit as st
 import pandas as pd
@@ -14,14 +16,23 @@ def load_data():
     return data
 
 
+def get_civis_platform_username():
+    """Get the username of the current Civis Platform user."""
+    # The Civis API key is available as an environment variable on Civis Platform.
+    # The check for `if os.getenv("CIVIS_API_KEY"):` below allows us to
+    # test run this app locally when a key isn't available.
+    if os.getenv("CIVIS_API_KEY"):
+        civis_client = civis.APIClient()
+        return civis_client.username
+
+
 def main():
     data = load_data()
 
     # You can interact with the Civis API using the "civis" Python package:
     # https://civis-python.readthedocs.io/
-    # For example, to get the username of the current user:
-    civis_client = civis.APIClient()
-    username = civis_client.username
+    # Here, we demo a simple example of getting the username of the current user.
+    username = get_civis_platform_username()
 
     st.write(
         "This is a demo Streamlit app "

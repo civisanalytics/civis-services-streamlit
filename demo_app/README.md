@@ -14,3 +14,10 @@ For this purpose, we recommend [pip-tools](https://pip-tools.readthedocs.io/en/l
   `requirements.txt` is _not_ meant to be manually edited,
   and pins the exact versions for the dependencies specified in `requirements-core.txt`
   as well as their transitive dependencies.
+
+To test run this demo app locally:
+
+```shell
+pip install -r requirements.txt
+streamlit run app.py
+```
