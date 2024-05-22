@@ -17,17 +17,17 @@ if [ ! -f requirements.txt ]; then
          "to pin the exact version of the Python dependencies." >&2
 else
     echo "Installing dependencies"
-    pip install -r requirements.txt
+    pip install --progress-bar off -r requirements.txt
 fi
 
-if [[ ! -n $(command -v streamlit) ]]; then
-    echo "The 'streamlit' command doesn't exist." \
-         "The likely reason is that the package 'streamlit' isn't specified in requirements.txt." \
-         "It is strongly recommended that 'streamlit' be pinned with a specific version in requirements.txt" \
-         "for your app's stability." \
-         "For now, 'streamlit' is going to be installed by running 'pip install streamlit'." >&2
-    pip install streamlit
-fi
+for package in streamlit civis; do
+  if [[ ! -n $(command -v $package) ]]; then
+      echo "The package '$package' wasn't installed, so we're installing its latest version. " \
+           "It is strongly recommended that '$package' be pinned with a specific version in requirements.txt " \
+           "for your app's stability." >&2
+      pip install --progress-bar off $package
+  fi
+done
 
 if [ -f pyproject.toml ]; then
     echo "Installing python package defined by pyproject.toml"

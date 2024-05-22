@@ -11,7 +11,7 @@ To get a sense of what a Streamlit app looks like on Civis Platform:
 
 * Log on to Civis Platform.
 * From the top navigation bar, click "Publish".
-* Under "Services", clck "Streamlit Demo".
+* Under "Services", click "Streamlit Demo".
 
 These steps create a new Civis Platform service configured for a Streamlit demo app
 pointing to this GitHub repository.
@@ -23,9 +23,10 @@ If you would like to start making the demo app your own
 by making code changes,
 you may [fork this GitHub repository](https://github.com/civisanalytics/civis-services-streamlit/fork)
 where the demo app's source code is in the directory [`demo_app/`](demo_app).
-If you'd like to host and use your own Docker image,
+If you would like to host and use your own Docker image,
 [`Dockerfile`](Dockerfile) and [`entrypoint.sh`](entrypoint.sh) from this GitHub repository
-defines the `civisanalytics/civis-services-streamlit` image that you may like to modify upon.
+define the `civisanalytics/civis-services-streamlit` image that you may like to modify
+and then host on your own DockerHub account.
 
 ## Building and Deploying Your Streamlit Application
 
@@ -53,11 +54,8 @@ here are the requirements.
    # requirements.txt specifies the Python dependencies to be installed for your Streamlit app to work.
    # Note that "streamlit" itself should be one of the packages specified
    # (so that you can pin the specific Streamlit version for your use case).
-   # If requirements.txt is presented,
+   # If requirements.txt is present,
    # the command `pip install -r requirements.txt` will be run to install these dependencies.
-   # If requirements.txt isn't provided, Streamlit will be installed
-   # with `pip install streamlit` pulling in whatever Streamlit version is available
-   # for the given Python version.
 
    pyproject.toml
    # An optional file.
