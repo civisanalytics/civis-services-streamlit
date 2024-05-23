@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      # The Python version of this CircleCI image doesn't matter too much,
+      # because we're going to build our image from our own Dockerfile
+      # and run everything inside this image.
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build image
+          command: docker build --target test -t testimage .
+      - run:
+          name: Check that the demo app can run inside the image
+          command: docker run testimage /app/demo_app/test_demo_app_on_ci.sh
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
