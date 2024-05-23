@@ -35,6 +35,7 @@ if [ -f pyproject.toml ]; then
 fi
 
 pip cache purge
+pip list
 
 echo "Running Streamlit application"
 streamlit run app.py
