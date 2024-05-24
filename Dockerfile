@@ -19,6 +19,10 @@ ENV STREAMLIT_CLIENT_SHOW_ERROR_DETAILS=false \
     STREAMLIT_SERVER_PORT=3838 \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 
+COPY ./demo_app/requirements.txt .
+RUN pip install --progress-bar off --no-cache-dir -r requirements.txt && \
+    rm requirements.txt
+
 # Suppress the "Welcome to Streamlit" message at startup asking for an email address:
 # https://discuss.streamlit.io/t/streamlit-showing-me-welcome-to-streamlit-message-when-executing-it-with-docker/26168/2
 RUN mkdir -p ~/.streamlit/ && \

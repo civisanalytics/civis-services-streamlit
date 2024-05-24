@@ -16,25 +16,15 @@ if [ ! -f requirements.txt ]; then
          "For your app's stability, it is strongly recommended that requirements.txt be provided" \
          "to pin the exact version of the Python dependencies." >&2
 else
-    echo "Installing dependencies"
-    pip install --progress-bar off -r requirements.txt
+    echo "Installing dependencies from requirements.txt"
+    pip install --progress-bar off --no-cache-dir -r requirements.txt
 fi
-
-for package in streamlit civis; do
-  if [[ ! -n $(command -v $package) ]]; then
-      echo "The package '$package' wasn't installed, so we're installing its latest version. " \
-           "It is strongly recommended that '$package' be pinned with a specific version in requirements.txt " \
-           "for your app's stability." >&2
-      pip install --progress-bar off $package
-  fi
-done
 
 if [ -f pyproject.toml ]; then
     echo "Installing python package defined by pyproject.toml"
     pip install --no-deps -e .
 fi
 
-pip cache purge
 pip list
 
 echo "Running Streamlit application"

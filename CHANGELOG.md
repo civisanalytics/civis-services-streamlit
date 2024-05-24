@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.1.0] - 2024-05-24
+
+### Added
+- Docker image now pre-installs Python requirements for the demo app. (#2)
+
+### Changed
+- Updated demo app's dependencies to the latest versions: (#2)
+    * civis 2.0.0 -> 2.1.0
+    * streamlit 1.34.0 -> 1.35.0
+
 ## [1.0.0] - 2024-05-23
 
 First release!
