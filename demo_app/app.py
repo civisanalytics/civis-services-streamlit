@@ -41,8 +41,7 @@ def main():
 
     st.write(
         "To create your own app, "
-        "fork the [civis-services-streamlit GitHub repository](https://github.com/civisanalytics/civis-services-streamlit) "  # noqa: E501
-        "and follow the instructions."
+        "follow the instructions at the [civis-services-streamlit GitHub repository](https://github.com/civisanalytics/civis-services-streamlit)."  # noqa: E501
     )
 
     st.title("The Iris Dataset")
