@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.2.0] - 2024-06-24
+
+### Changed
+- Updated Python version in Docker image: 3.12.3 -> 3.12.4. (#3)
+- Updated demo app's dependencies to the latest versions: (#3)
+    * civis 2.1.0 -> 2.3.0
+
 ## [1.1.0] - 2024-05-24
 
 ### Added

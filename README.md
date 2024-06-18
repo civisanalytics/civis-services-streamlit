@@ -22,6 +22,7 @@ for service deployment.
 If you would like to start making the demo app your own
 by making code changes,
 you may [fork this GitHub repository](https://github.com/civisanalytics/civis-services-streamlit/fork)
+(note: your fork would be public; GitHub only allows public forks from a public repository)
 where the demo app's source code is in the directory [`demo_app/`](demo_app).
 If you would like to host and use your own Docker image,
 [`Dockerfile`](Dockerfile) and [`entrypoint.sh`](entrypoint.sh) from this GitHub repository
@@ -83,7 +84,7 @@ here are the requirements.
    specify the directory path that points to where the app code is located.
    (For the demo app in the previous section above, the directory path would be `demo_app` from this current repo.)
 5. For the Docker image, the name is `civisanalytics/civis-services-streamlit`,
-   and the tag is one of those [listed on DockerHub](https://hub.docker.com/repository/docker/civisanalytics/civis-services-streamlit/tags).
+   and the tag is one of those [listed on DockerHub](https://hub.docker.com/r/civisanalytics/civis-services-streamlit/tags).
    Note that the specific Docker image name and tag you've chosen determines which Python version
    your app is going to run on.
 
