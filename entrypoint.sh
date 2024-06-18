@@ -13,7 +13,7 @@ fi
 
 if [ ! -f requirements.txt ]; then
     echo "The file 'requirements.txt' is not found at $APP_DIR/$REPO_PATH_DIR." \
-         "For your app's stability, it is strongly recommended that requirements.txt be provided" \
+         "For your app's stability, it is strongly recommended that requirements.txt be provided " \
          "to pin the exact version of the Python dependencies." >&2
 else
     echo "Installing dependencies from requirements.txt"
