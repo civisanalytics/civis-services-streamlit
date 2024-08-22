@@ -7,7 +7,15 @@ ENV PIP_ROOT_USER_ACTION=ignore
 
 RUN apt-get update && apt-get install -y \
     git \
+    curl \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+ADD https://astral.sh/uv/0.3.1/install.sh /uv-installer.sh
+RUN sh /uv-installer.sh && rm /uv-installer.sh
+ENV PATH="/root/.cargo/bin/:$PATH" \
+    UV_SYSTEM_PYTHON=1
 
 WORKDIR /app
 
@@ -20,7 +28,7 @@ ENV STREAMLIT_CLIENT_SHOW_ERROR_DETAILS=false \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 
 COPY ./demo_app/requirements.txt .
-RUN pip install --progress-bar off --no-cache-dir -r requirements.txt && \
+RUN uv pip install --no-progress --no-cache -r requirements.txt && \
     rm requirements.txt
 
 # Suppress the "Welcome to Streamlit" message at startup asking for an email address:
