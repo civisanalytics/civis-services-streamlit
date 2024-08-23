@@ -17,15 +17,15 @@ if [ ! -f requirements.txt ]; then
          "to pin the exact version of the Python dependencies." >&2
 else
     echo "Installing dependencies from requirements.txt"
-    pip install --progress-bar off --no-cache-dir -r requirements.txt
+    uv pip install --no-progress --no-cache -r requirements.txt
 fi
 
 if [ -f pyproject.toml ]; then
     echo "Installing python package defined by pyproject.toml"
-    pip install --no-deps -e .
+    uv pip install --no-deps -e .
 fi
 
-pip list
+uv pip list
 
 echo "Running Streamlit application"
 streamlit run app.py
