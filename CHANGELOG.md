@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [1.3.0] - 2024-08-26
+## [1.3.0] - 2024-08-23
 
 ### Changed
 - Updated Python version in Docker image: 3.12.4 -> 3.12.5. (#4)
