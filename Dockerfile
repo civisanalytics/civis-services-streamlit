@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64 python:3.12.4-slim AS base
+FROM --platform=linux/x86_64 python:3.12.5-slim AS base
 LABEL maintainer=opensource@civisanalytics.com
 
 # Supress pip user warnings:

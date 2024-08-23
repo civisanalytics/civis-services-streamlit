@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.3.0] - 2024-08-26
+
+### Changed
+- Updated Python version in Docker image: 3.12.4 -> 3.12.5. (#4)
+- Updated demo app's dependencies to the latest versions: (#4)
+    * scikit-learn 1.5.0 -> 1.5.1
+    * streamlit 1.35.0 -> 1.37.1
+- Switched from pip to uv for faster Python dependency installation. (#4)
+
 ## [1.2.0] - 2024-06-24
 
 ### Changed
