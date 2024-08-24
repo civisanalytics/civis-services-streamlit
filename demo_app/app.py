@@ -41,7 +41,8 @@ def fetch_data(job_id, run_id=None):
     # append timing columns to dataframe
     df = pd.concat([df, df_timing], axis=1)
 
-    df["is_test_relation"] = df["unique_id"].str.startswith("test.")
+    df["model_type"] = df["unique_id"].str.split(".").str[0]
+    df["dbt_model"] = df["unique_id"].str.split(".").str[-1]
     return df
 
 
@@ -53,29 +54,33 @@ st.title("Civis dbt Pipeline Dashboard")
 job_id = st.text_input("Job ID", "")
 run_id = st.text_input("Run ID (optional)", "")
 # Add checkbox to the UI for filtering
-filter_test_relations = st.checkbox("Filter out testing tasks")
+filter_test_relations = st.checkbox("Filter out testing tasks", True)
 
 # Button to fetch data and display Gantt chart
 if st.button("Display Pipeline Information"):
     if job_id:
         df = fetch_data(job_id, run_id if run_id else None)
-        # breakpoint()
 
         if filter_test_relations:
-            df = df[~df.is_test_relation]
+            df = df[df.model_type != "test"]
 
-        # Display the metrics on the app
-        st.text(f"Total Tasks Executed: {df.shape[0]}")
-        st.text(f"Total Task Time: {df.execution_time.sum() / 60} minutes")
-        st.text(f"Average Task Time: {df.execution_time.mean():.2f} seconds")
+        # Display some metrics
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric("# Tasks Executed", df.shape[0])
+        col2.metric(
+            "Total Task Duration (minutes)", (df.execution_time.sum() / 60).round(2)
+        )
+        col3.metric("Avg Task Duration (seconds)", df.execution_time.mean().round(2))
 
         # Check if the DataFrame is not empty
         if not df.empty:
+            # add gantt chart
             fig = px.timeline(
                 df,
                 x_start="started_at",
                 x_end="completed_at",
-                y="unique_id",
+                y="dbt_model",
                 color="status",
                 hover_data=[
                     "unique_id",
@@ -84,10 +89,35 @@ if st.button("Display Pipeline Information"):
                     "completed_at",
                     "execution_time",
                 ],
-                labels={"unique_id": "Task ID", "status": "Status"},
+                labels={"dbt_model": "Task", "status": "Status"},
+                title="Execution Timeline",
             )
+            # This makes sure that the y-axis is from first to last task
             fig.update_yaxes(autorange="reversed")
             st.plotly_chart(fig, theme="streamlit")
+
+            # Add a table to display the top 10 longest running tasks
+            cols_to_display = [
+                "unique_id",
+                "status",
+                "execution_time",
+                "started_at",
+                "completed_at",
+            ]
+            st.header("Top 10 Longest Running Tasks", divider=True)
+            st.dataframe(
+                df[cols_to_display]
+                .sort_values("execution_time", ascending=False)
+                .head(10),
+                column_config={
+                    "unique_id": "Task ID",
+                    "status": "Status",
+                    "execution_time": "Execution Time (seconds)",
+                    "started_at": "Start",
+                    "completed_at": "Finish",
+                },
+                hide_index=True,
+            )
         else:
             st.error(
                 "No data available to display. Please check your Job ID and Run ID."
