@@ -1,58 +1,95 @@
 """Demo app for civis-services-streamlit."""
 
-import os
-
-import civis
 import streamlit as st
+import civis
+import plotly.express as px
+
 import pandas as pd
-from sklearn import datasets
 
 
-@st.cache_data
-def load_data():
-    iris = datasets.load_iris()
-    data = pd.DataFrame(iris.data, columns=iris.feature_names)
-    data["label"] = [iris.target_names[i] for i in iris.target]
-    return data
+# Function to fetch data from Civis Platform using Civis Python client
+def fetch_data(job_id, run_id=None):
+    # Initialize Civis client
+    client = civis.APIClient()
 
+    # This is a placeholder for the actual logic to fetch run outputs
+    # The structure and exact method to retrieve outputs will depend on your Civis setup
+    # You might need client.scripts.get_containers_runs_outputs or a similar method
+    if run_id is not None:
+        outputs = client.jobs.list_runs_outputs(job_id, run_id)
+    else:
+        latest_run = client.jobs.list_runs(job_id, limit=1)[0]
+        outputs = client.jobs.list_runs_outputs(job_id, latest_run.id)
 
-def get_civis_platform_username():
-    """Get the username of the current Civis Platform user."""
-    # The Civis API key is available as an environment variable on Civis Platform.
-    # The check for `if os.getenv("CIVIS_API_KEY"):` below allows us to
-    # test run this app locally when a key isn't available.
-    if os.getenv("CIVIS_API_KEY"):
-        civis_client = civis.APIClient()
-        return civis_client.username
+    # Fetch the file_id for the run_results object
+    oid = [obj["object_id"] for obj in outputs if obj["name"] == "run_results.json"][0]
+    run_results = civis.io.file_to_json(oid)
 
-
-def main():
-    data = load_data()
-
-    # You can interact with the Civis API using the "civis" Python package:
-    # https://civis-python.readthedocs.io/
-    # Here, we demo a simple example of getting the username of the current user.
-    username = get_civis_platform_username()
-
-    st.write(
-        "This is a demo Streamlit app "
-        f"currently run by Civis Platform user '{username}'."
+    # Convert the results into a dataframe
+    df = pd.DataFrame(run_results["results"])
+    df_timing = pd.DataFrame(
+        [
+            (t["started_at"], t["completed_at"])
+            for res in run_results["results"]
+            for t in res["timing"]
+            if t["name"] == "execute"
+        ],
+        columns=["started_at", "completed_at"],
     )
+    df_timing = df_timing.apply(pd.to_datetime)
 
-    st.write(
-        "To create your own app, "
-        "follow the instructions at the [civis-services-streamlit GitHub repository](https://github.com/civisanalytics/civis-services-streamlit)."  # noqa: E501
-    )
+    # append timing columns to dataframe
+    df = pd.concat([df, df_timing], axis=1)
 
-    st.title("The Iris Dataset")
-    st.write(data)
-
-    st.subheader("Sepal Length vs. Sepal Width")
-    st.scatter_chart(data, x="sepal length (cm)", y="sepal width (cm)", color="label")
-
-    st.subheader("Petal Length vs. Petal Width")
-    st.scatter_chart(data, x="petal length (cm)", y="petal width (cm)", color="label")
+    df["is_test_relation"] = df["unique_id"].str.startswith("test.")
+    return df
 
 
-if __name__ == "__main__":
-    main()
+# Streamlit UI
+st.title("Civis dbt Pipeline Dashboard")
+
+# Input fields for job_id and an optional run_id
+job_id = st.text_input("Job ID", "")
+run_id = st.text_input("Run ID (optional)", "")
+# Add checkbox to the UI for filtering
+filter_test_relations = st.checkbox("Filter out testing tasks")
+
+# Button to fetch data and display Gantt chart
+if st.button("Display Pipeline Information"):
+    if job_id:
+        df = fetch_data(job_id, run_id if run_id else None)
+        # breakpoint()
+
+        if filter_test_relations:
+            df = df[~df.is_test_relation]
+
+        # Display the metrics on the app
+        st.text(f"Total Tasks Executed: {df.shape[0]}")
+        st.text(f"Total Task Time: {df.execution_time.sum() / 60} minutes")
+        st.text(f"Average Task Time: {df.execution_time.mean():.2f} seconds")
+
+        # Check if the DataFrame is not empty
+        if not df.empty:
+            fig = px.timeline(
+                df,
+                x_start="started_at",
+                x_end="completed_at",
+                y="unique_id",
+                color="status",
+                hover_data=[
+                    "unique_id",
+                    "status",
+                    "started_at",
+                    "completed_at",
+                    "execution_time",
+                ],
+                # execution_time="execution_time",
+            )
+            fig.update_yaxes(autorange="reversed")
+            st.plotly_chart(fig, theme="streamlit")
+        else:
+            st.error(
+                "No data available to display. Please check your Job ID and Run ID."
+            )
+    else:
+        st.error("Please enter a valid Job ID.")
