@@ -46,6 +46,7 @@ def fetch_data(job_id, run_id=None):
 
 
 # Streamlit UI
+st.set_page_config(page_title="Civis dbt Pipeline Dashboard", layout="wide")
 st.title("Civis dbt Pipeline Dashboard")
 
 # Input fields for job_id and an optional run_id
@@ -83,7 +84,7 @@ if st.button("Display Pipeline Information"):
                     "completed_at",
                     "execution_time",
                 ],
-                # execution_time="execution_time",
+                labels={"unique_id": "Task ID", "status": "Status"},
             )
             fig.update_yaxes(autorange="reversed")
             st.plotly_chart(fig, theme="streamlit")
