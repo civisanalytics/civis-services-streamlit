@@ -22,7 +22,9 @@ def fetch_data(job_id, run_id=None):
         outputs = client.jobs.list_runs_outputs(job_id, latest_run.id)
 
     # Fetch the file_id for the run_results object
-    oid = [obj["object_id"] for obj in outputs if obj["name"] == "run_results.json"][0]
+    oid = [
+        obj["object_id"] for obj in outputs if obj["name"].startswith("run_results")
+    ][0]
     run_results = civis.io.file_to_json(oid)
 
     # Convert the results into a dataframe
