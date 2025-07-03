@@ -38,12 +38,17 @@ here are the requirements.
 1. Your Streamlit application must have its source code hosted on a GitHub repository.
    The Civis Platform user account that's going to deploy this Streamlit app must have
    access to this GitHub repo.
-2. The following explains the expected files for your app:
+2. The following explains the expected files for your app.
+   Note that these files listed should be at the same directory in your GitHub repository.
 
-   * `app.py`
+   * Your app's entry-point Python script
 
-     A required file.
-     `app.py` is your Streamlit app's entry point.
+     A required file, with a file extension name `.py` for a Python script.
+     This is your Streamlit app's entry point.
+     The recommended filename is `app.py`.
+     If you use a filename different from `app.py`,
+     you must specify its file path, starting from your repo's root (e.g., `from/repo_root/to/your_custom_app.py`),
+     in the Civis Platform service your're going to set up (see below).
      For which Python version you should use (e.g., Python 3.13),
      it is determined by which Docker image name and tag you're going to use
      to deploy your app on Civis Platform.
@@ -83,6 +88,9 @@ here are the requirements.
 4. If your code is at a directory in your repo (rather than directly at the root level of your repo),
    specify the directory path that points to where the app code is located.
    (For the demo app in the previous section above, the directory path would be `demo_app` from this current repo.)
+   By default, your Streamlit app's entry point Python script is assumed to be named `app.py`.
+   If you use a filename other than `app.py`,
+   you must specify its file path starting from the repo root, e.g., `from/repo_root/to/your_custom_app.py`.
 5. For the Docker image, the name is `civisanalytics/civis-services-streamlit`,
    and the tag is one of those [listed on DockerHub](https://hub.docker.com/r/civisanalytics/civis-services-streamlit/tags).
    Note that the specific Docker image name and tag you've chosen determines which Python version
