@@ -1,4 +1,6 @@
-FROM --platform=linux/x86_64 python:3.13.5-slim AS base
+ARG PLATFORM=linux/x86_64
+
+FROM --platform=$PLATFORM python:3.13.5-slim AS base
 LABEL maintainer=opensource@civisanalytics.com
 
 # Supress pip user warnings:
@@ -14,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 # Install uv
 ADD https://astral.sh/uv/0.7.19/install.sh /uv-installer.sh
 RUN sh /uv-installer.sh && rm /uv-installer.sh
-ENV PATH="/root/.cargo/bin/:$PATH" \
+ENV PATH="/root/.local/bin/:$PATH" \
     UV_SYSTEM_PYTHON=1
 
 WORKDIR /app
