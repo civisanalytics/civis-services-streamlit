@@ -39,7 +39,7 @@ here are the requirements.
    The Civis Platform user account that's going to deploy this Streamlit app must have
    access to this GitHub repo.
 2. The following explains the expected files for your app.
-   Note that these files listed should be at the same directory in your GitHub repository.
+   Note that these files listed must be at the same directory in your GitHub repository.
 
    * Your app's entry-point Python script
 

@@ -8,11 +8,11 @@ cd "$APP_DIR"
 
 if [ -d "$REPO_PATH_DIR" ]; then
     echo "$REPO_PATH_DIR is a directory. Your Streamlit app's entry point is assumed to be at $REPO_PATH_DIR/app.py."
-    EXPORT APP_PY="app.py"
+    export APP_PY="app.py"
 elif [ -f "$REPO_PATH_DIR" ]; then
     echo "$REPO_PATH_DIR is a file, assumed to be the entry point of your Streamlit app."
-    EXPORT APP_PY="$(basename "$REPO_PATH_DIR")"
-    EXPORT REPO_PATH_DIR="$(dirname "$REPO_PATH_DIR")"
+    export APP_PY="$(basename "$REPO_PATH_DIR")"
+    export REPO_PATH_DIR="$(dirname "$REPO_PATH_DIR")"
 else
     echo "The specified path '$REPO_PATH_DIR' does not exist." >&2
     echo "Please ensure that the path is correct and that it points to your Streamlit app's directory or file." >&2
