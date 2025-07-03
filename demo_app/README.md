@@ -3,11 +3,12 @@
 We strongly recommend pinning the exact package versions
 (i.e., using double-equals `==`) in `requirements.txt`.
 
-For stability in production, especially if you have more complicated requirements,
-we recommend pinning the exact versions of both the dependencies
+For stability in production, we recommend locking down the execution environment by
+pinning the exact versions of both the dependencies
 your code imports and their transitive dependencies.
-For this purpose, we recommend [pip-tools](https://pip-tools.readthedocs.io/en/latest/)
-to generate `requirements.txt`.
+Tools for generating a "full" `requirements.txt` include
+[uv](https://docs.astral.sh/uv/) and 
+[pip-tools](https://pip-tools.readthedocs.io/en/latest/).
 
 ## Running the demo app locally
 

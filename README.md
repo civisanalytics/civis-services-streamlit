@@ -44,7 +44,7 @@ here are the requirements.
 
      A required file.
      `app.py` is your Streamlit app's entry point.
-     For which Python version you should use (e.g., Python 3.12),
+     For which Python version you should use (e.g., Python 3.13),
      it is determined by which Docker image name and tag you're going to use
      to deploy your app on Civis Platform.
      The Python version is specified by the base image in the file `Dockerfile`

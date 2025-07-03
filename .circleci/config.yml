@@ -6,7 +6,7 @@ jobs:
       # The Python version of this CircleCI image doesn't matter too much,
       # because we're going to build our image from our own Dockerfile
       # and run everything inside this image.
-      - image: cimg/python:3.12
+      - image: cimg/python:3.13
     steps:
       - checkout
       - setup_remote_docker
