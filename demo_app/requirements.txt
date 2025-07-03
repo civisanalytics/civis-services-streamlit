@@ -1,4 +1,4 @@
-# You can modify the packages listed and their versions as desired.
+# In your own app, you can modify the packages listed and their versions as desired.
 # As a best practice for stability, specify the exact version (i.e., use "==") of each package to be installed.
 # Include only packages that are actually imported in your app code.
 

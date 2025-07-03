@@ -14,6 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.4.0] - 2024-07-09
+
+### Added
+- Added support for an entry point script whose filename isn't `app.py`,
+  in which case the user would need to specify the file path in the platform service object. (#5)
+
+### Changed
+- Updated Python version in Docker image: 3.12.5 -> 3.13.5. (#5)
+- Updated demo app's dependencies to the latest versions: (#5)
+    * civis 2.3.0 -> 2.7.1
+    * pandas 2.2.2 -> 2.3.0
+    * scikit-learn 1.5.1 -> 1.7.0
+    * streamlit 1.37.1 -> 1.46.1
+
 ## [1.3.0] - 2024-08-23
 
 ### Changed
