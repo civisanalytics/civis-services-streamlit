@@ -44,7 +44,8 @@ here are the requirements.
    * Your app's entry-point Python script
 
      A required file, with a file extension name `.py` for a Python script.
-     This is your Streamlit app's entry point.
+     This is your Streamlit app's entry point
+     (i.e., `streamlit run <something>.py` will be executed to spin up your app).
      The recommended filename is `app.py`, but if you use a different filename,
      you must specify its file path
      (starting from your repo's root, e.g., `from/repo_root/to/your_custom_app.py`)
