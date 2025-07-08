@@ -14,7 +14,7 @@ elif [ -f "$REPO_PATH_DIR" ]; then
     export APP_PY="$(basename "$REPO_PATH_DIR")"
     export REPO_PATH_DIR="$(dirname "$REPO_PATH_DIR")"
 elif [ -z "$REPO_PATH_DIR" ] || [ "$REPO_PATH_DIR" = "." ]; then
-    echo "No specific path provided for the Streamlit app. Defaulting to the current directory. The app's entry point is assumed to be at ./app.py."
+    echo "No specific path provided for the Streamlit app. Defaulting to the repo's root directory. The app's entry point is assumed to be at ./app.py."
     export REPO_PATH_DIR="."
     export APP_PY="app.py"
 else
