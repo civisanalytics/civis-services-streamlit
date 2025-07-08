@@ -45,9 +45,9 @@ here are the requirements.
 
      A required file, with a file extension name `.py` for a Python script.
      This is your Streamlit app's entry point.
-     The recommended filename is `app.py`.
-     If you use a filename different from `app.py`,
-     you must specify its file path, starting from your repo's root (e.g., `from/repo_root/to/your_custom_app.py`),
+     The recommended filename is `app.py`, but if you use a different filename,
+     you must specify its file path
+     (starting from your repo's root, e.g., `from/repo_root/to/your_custom_app.py`)
      in the Civis Platform service your're going to set up (see below).
      For which Python version you should use (e.g., Python 3.13),
      it is determined by which Docker image name and tag you're going to use
