@@ -13,6 +13,9 @@ elif [ -f "$REPO_PATH_DIR" ]; then
     echo "$REPO_PATH_DIR is a file, assumed to be the entry point of your Streamlit app."
     export APP_PY="$(basename "$REPO_PATH_DIR")"
     export REPO_PATH_DIR="$(dirname "$REPO_PATH_DIR")"
+elif [ -z "$REPO_PATH_DIR" ] || [ "$REPO_PATH_DIR" = "." ]; then
+    export REPO_PATH_DIR="."
+    export APP_PY="app.py"
 else
     echo "The specified path '$REPO_PATH_DIR' does not exist." >&2
     echo "Please ensure that the path is correct and that it points to your Streamlit app's directory or file." >&2
@@ -27,7 +30,7 @@ if [ ! -f "$APP_PY" ]; then
 fi
 
 if [ ! -f requirements.txt ]; then
-    echo "The file 'requirements.txt' is not found at $REPO_PATH_DIR. " \
+    echo "The file 'requirements.txt' is not found. " \
          "For your app's stability, it is strongly recommended that requirements.txt be provided " \
          "to pin the exact version of the Python dependencies." >&2
 else
