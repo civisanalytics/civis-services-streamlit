@@ -1,4 +1,7 @@
 [theme]
+# The configuration here applies some Civis-specific colors and styling.
+# For info on how to apply your own theme, see
+# https://docs.streamlit.io/develop/concepts/configuration/theming-customize-colors-and-borders.
 primaryColor = "#215470"
 backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F8F9FA"
