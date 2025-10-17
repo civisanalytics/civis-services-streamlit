@@ -53,6 +53,10 @@ def main():
     st.subheader("Petal Length vs. Petal Width")
     st.scatter_chart(data, x="petal length (cm)", y="petal width (cm)", color="label")
 
+    st.info("Here's an info box.")
+    st.warning("Here's a warning box.")
+    st.error("Here's an error box.")
+
 
 if __name__ == "__main__":
     main()
