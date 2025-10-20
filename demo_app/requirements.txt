@@ -3,6 +3,6 @@
 # Include only packages that are actually imported in your app code.
 
 civis==2.7.1
-pandas==2.3.0
-scikit-learn==1.7.0
-streamlit==1.46.1
+pandas==2.3.3
+scikit-learn==1.7.2
+streamlit==1.50.0
