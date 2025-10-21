@@ -8,14 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-
-- Added example config.toml with Civis styling in demo_app. (#6)
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [1.5.0] - 2025-10-21
+
+### Added
+
+- Added example config.toml with Civis styling in demo_app. (#6)
+
+### Changed
+
+- Updated demo app's dependencies to the latest versions: (#7)
+    * pandas 2.3.0 -> 2.3.3
+    * scikit-learn 1.7.0 -> 1.7.2
+    * streamlit 1.46.1 -> 1.50.0
 
 ## [1.4.0] - 2024-07-09
 

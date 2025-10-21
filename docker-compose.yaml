@@ -1,0 +1,17 @@
+# This file is to facilitate local development for maintenance of the Dockerfile
+# and demo app. To run the app locally, execute the following:
+# `docker-compose build && docker-compose up`
+# and then open http://127.0.0.1:3838/ in your browser.
+services:
+  demo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "3838:3838"
+    environment:
+      - APP_DIR=/app
+      - REPO_PATH_DIR=demo_app
+    volumes:
+      - .:/app
