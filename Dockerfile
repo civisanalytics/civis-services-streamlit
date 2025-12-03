@@ -47,12 +47,11 @@ ENV STREAMLIT_CLIENT_SHOW_ERROR_DETAILS=false \
 RUN mkdir -p ~/.streamlit/ && \
   echo "[general]\nemail = \"\""  > ~/.streamlit/credentials.toml
 
-FROM base AS production
-COPY ./entrypoint.sh /
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 FROM base AS test
 COPY ./demo_app/ /app/demo_app/
 
-# Defaults to production as the final stage
-FROM production
+FROM base AS production
+COPY ./entrypoint.sh /
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
