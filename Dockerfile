@@ -1,6 +1,6 @@
 ARG PLATFORM=linux/x86_64
 
-FROM --platform=$PLATFORM python:3.13.5-slim AS base
+FROM --platform=$PLATFORM python:3.12-slim AS base
 LABEL maintainer=opensource@civisanalytics.com
 
 # Supress pip user warnings:
