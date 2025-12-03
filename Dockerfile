@@ -13,9 +13,18 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv
-ADD https://astral.sh/uv/0.7.19/install.sh /uv-installer.sh
-RUN sh /uv-installer.sh && rm /uv-installer.sh
+# Install Node.js 22 and Caddy
+RUN apt-get update && \
+    apt-get install -y debian-keyring debian-archive-keyring apt-transport-https && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get update && \
+    apt-get install -y nodejs caddy && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    curl -LsSf https://astral.sh/uv/install.sh 
+
 ENV PATH="/root/.local/bin/:$PATH" \
     UV_SYSTEM_PYTHON=1
 
@@ -29,9 +38,9 @@ ENV STREAMLIT_CLIENT_SHOW_ERROR_DETAILS=false \
     STREAMLIT_SERVER_PORT=3838 \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 
-COPY ./demo_app/requirements.txt .
-RUN uv pip install --no-progress --no-cache -r requirements.txt && \
-    rm requirements.txt
+# COPY ./demo_app/requirements.txt .
+# RUN uv pip install --no-progress --no-cache -r requirements.txt && \
+#     rm requirements.txt
 
 # Suppress the "Welcome to Streamlit" message at startup asking for an email address:
 # https://discuss.streamlit.io/t/streamlit-showing-me-welcome-to-streamlit-message-when-executing-it-with-docker/26168/2
