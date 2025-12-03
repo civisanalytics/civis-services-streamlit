@@ -49,7 +49,7 @@ RUN mkdir -p ~/.streamlit/ && \
 
 FROM base AS production
 COPY ./entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 FROM base AS test
 COPY ./demo_app/ /app/demo_app/
