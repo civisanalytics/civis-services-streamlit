@@ -4,6 +4,7 @@ set -e
 
 python --version
 
+
 cd "$APP_DIR"
 
 if [ -d "$REPO_PATH_DIR" ]; then
