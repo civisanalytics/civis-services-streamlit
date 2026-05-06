@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.6.0] - 2026-05-06
 
 - Updated Python version: 3.13.5 -> 3.13.13. (#8)
-- Updated uv version: 0.7.9 -> 0.11.8. (#8)
+- Updated uv version: 0.7.19 -> 0.11.8. (#8)
 - Updated demo app's dependencies to the latest versions: (#8)
     * civis 2.7.1 -> 2.9.1
     * scikit-learn 1.7.2 -> 1.8.0
