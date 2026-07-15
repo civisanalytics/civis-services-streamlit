@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.0.0] - 2026-07-15
+
+The version number has incremented from 1.x.x to 2.x.x due to breaking changes
+from Python 3.13 -> 3.14 and Pandas 2.x -> 3.x.
+
+- Updated Python version: 3.13.13 -> 3.14.6. (#9)
+- Updated uv version: 0.11.8 -> 0.11.28. (#9)
+- Updated demo app's dependencies to the latest versions: (#9)
+    * pandas 2.3.3 -> 3.0.3
+    * scikit-learn 1.8.0 -> 1.9.0
+    * streamlit 1.57.0 -> 1.59.2
+
 ## [1.6.0] - 2026-05-06
 
 - Updated Python version: 3.13.5 -> 3.13.13. (#8)
