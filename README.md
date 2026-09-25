@@ -97,6 +97,35 @@ here are the requirements.
    Note that the specific Docker image name and tag you've chosen determines which Python version
    your app is going to run on.
 
+## Publishing the Docker Image
+
+This section is for maintainers of this repository.
+
+Publishing to DockerHub is handled by GitHub Actions
+(see [.github/workflows](.github/workflows)). Both publishing workflows build the
+image and check that the demo app runs inside it before they push anything.
+
+The workflows use no stored DockerHub password or access token. They authenticate
+over OIDC: each run exchanges a GitHub identity token for a short-lived DockerHub token.
+This relies on an OIDC connection on the `civisanalytics` DockerHub organization,
+a `DOCKERHUB_OIDC_CONNECTIONID` repository variable holding that connection's ID
+(an identifier, not a secret), and a `dockerhub-publish` environment
+restricted to `main` and `v*.*.*`.
+
+Any PR merged to `main` is published as the `latest` tag on DockerHub.
+
+To cut a new version:
+
+1. Move the `Unreleased` section of the [changelog](CHANGELOG.md) under a
+   `[major.minor.patch]` heading, and merge that to `main`.
+   The release workflow refuses to publish if the changelog's newest version doesn't match the tag.
+2. Go to the "Releases" tab of this repository and click "Draft a new release".
+   Create a new tag in the form `vX.Y.Z` -- the leading `v` is required,
+   or else no build is triggered. Use the tag as the release title,
+   and include the changelog entry in the release description.
+3. Publishing the release creates the tag, which builds and pushes three identical
+   images tagged `major`, `major.minor`, and `major.minor.patch`.
+
 ## Support
 
 For feature inquiries, bug reports, and other questions,
