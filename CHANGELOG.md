@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [2.0.1] - 2026-09-25
+## [2.0.1] - 2026-09-28
 
 - Docker image builds and publishing moved from DockerHub autobuilds to GitHub Actions. (#12)
 
