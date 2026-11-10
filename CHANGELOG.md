@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.1.0] - 2026-11-10
+
+- Upgraded pip and uv to versions with updated CA certificate bundles,
+  in response to the eMudhra certificate authority compromise. (#13)
+- Updated Python version: 3.14.6 -> 3.14.10 (pip 26.1.2 -> 26.2.2). (#13)
+- Updated uv version: 0.11.28 -> 0.13.7. (#13)
+- Updated demo app's dependencies to the latest versions: (#13)
+    * civis 2.9.1 -> 2.11.0
+    * pandas 3.0.3 -> 3.1.1
+    * scikit-learn 1.9.0 -> 1.9.1
+    * streamlit 1.59.2 -> 1.67.0
+
 ## [2.0.1] - 2026-09-28
 
 - Docker image builds and publishing moved from DockerHub autobuilds to GitHub Actions. (#12)
